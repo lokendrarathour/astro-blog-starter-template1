@@ -1,0 +1,112 @@
+// FILE: src/layouts/BaseLayout.astro
+---
+const { title = "Niyera" } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #374151;
+      --max: 920px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    main { max-width: var(--max); margin: auto; padding: 4rem 1.5rem; }
+    section { margin: 4rem 0; }
+    h1, h2 { font-weight: 500; letter-spacing: -0.02em; }
+    h1 { font-size: clamp(2.2rem, 5vw, 3rem); }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    p { color: var(--muted); max-width: 680px; }
+    a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+    footer { text-align: center; padding: 3rem 1rem; color: var(--muted); font-size: 0.9rem; }
+    .hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; }
+    .tagline { margin-top: 1rem; font-size: 1.1rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+    .card { padding: 1.5rem; background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.05); }
+  </style>
+</head>
+<body>
+  <main>
+    <slot />
+  </main>
+  <footer>
+    © 2026 Niyera · An individual practice
+  </footer>
+</body>
+</html>
+
+// FILE: src/pages/index.astro
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Niyera">
+
+  <section class="hero">
+    <h1>A space to pause.<br/>Reflect. Realign.</h1>
+    <p class="tagline">
+      This is a quiet space for individuals navigating change, decisions, or transitions.
+    </p>
+  </section>
+
+  <section>
+    <h2>About</h2>
+    <p>
+      Niyera is an individual-led practice focused on clarity, reflection, and conscious direction.
+      The work here is not about fixing — it is about understanding, aligning, and choosing deliberately.
+    </p>
+  </section>
+
+  <section>
+    <h2>What Happens Here</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Pause</h3>
+        <p>You slow down long enough to hear what is actually asking for attention.</p>
+      </div>
+      <div class="card">
+        <h3>Reflect</h3>
+        <p>Patterns, assumptions, and options become visible without judgement.</p>
+      </div>
+      <div class="card">
+        <h3>Realign</h3>
+        <p>Next steps emerge naturally — grounded, realistic, and sustainable.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Conversations</h2>
+    <p>
+      Engagements here are conversational, confidential, and contextual.
+      There are no programs, packages, or promises — only thoughtful dialogue.
+    </p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>
+      If you would like to start a conversation, write to
+      <a href="mailto:hello@niyera.in">hello@niyera.in</a>
+    </p>
+  </section>
+
+</BaseLayout>
+
+// FILE: astro.config.mjs
+import { defineConfig } from 'astro/config';
+export default defineConfig({
+  output: 'static'
+});
